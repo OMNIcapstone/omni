@@ -3,7 +3,7 @@ opkg update
 
 # install dependencies
 opkg install libstdcpp
-opkg install git
+opkg install unzip
 
 # install nodejs globally
 opkg install node
@@ -12,7 +12,10 @@ opkg install node
 opkg install node-serialport
 
 # pull down repository
-git clone git://github.com/OMNICapstone/omni.git /mnt/sda1/omni
+wget --no-check-certificate -O /mnt/sda1/master.zip https://github.com/OMNIcapstone/omni/archive/master.zip
+unzip /mnt/sda1/master.zip -d /mnt/sda1/
+mv /mnt/sda1/omni-master /mnt/sda1/omni
+rm /mnt/sda1/master.zip
 
 # enable firmata using precompiled-sketch
 run-avrdude /mnt/sda1/omni/hardware/yun/sketches/StandardFirmataForATH0/StandardFirmataForATH0.hex
