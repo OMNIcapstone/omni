@@ -75,6 +75,7 @@ if (! mount | grep ^/dev/sda | grep -q 'on /overlay'); then
 	uci commit
 
 	# reboot
+	echo "Now rebooting. Please wait..."
 	reboot
 
 else
