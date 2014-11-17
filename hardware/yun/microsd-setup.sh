@@ -1,76 +1,84 @@
-# install tools
-opkg update
-opkg install e2fsprogs mkdosfs fdisk rsync
+if (! mount | grep ^/dev/sda | grep -q 'on /overlay'); then
 
-# unmount SD
-umount /dev/sda?
-rm -rf /mnt/sda?
+	# install tools
+	opkg update
+	opkg install e2fsprogs mkdosfs fdisk rsync
 
-# clear partition table
-dd if=/dev/zero of=/dev/sda bs=4096 count=10
+	# unmount SD
+	umount /dev/sda?
+	rm -rf /mnt/sda?
 
-# create first partition
-(echo n; echo p; echo 1; echo; echo +700M; echo w) | fdisk /dev/sda
+	# clear partition table
+	dd if=/dev/zero of=/dev/sda bs=4096 count=10
 
-# unmount SD
-umount /dev/sda?
-rm -rf /mnt/sda?
+	# create first partition
+	(echo n; echo p; echo 1; echo; echo +700M; echo w) | fdisk /dev/sda
 
-# create second partition
-(echo n; echo p; echo 2; echo; echo; echo w) | fdisk /dev/sda
+	# unmount SD
+	umount /dev/sda?
+	rm -rf /mnt/sda?
 
-# unmount SD
-umount /dev/sda?
-rm -rf /mnt/sda?
+	# create second partition
+	(echo n; echo p; echo 2; echo; echo; echo w) | fdisk /dev/sda
 
-# specify first partition FAT32
-(echo t; echo 1; echo c; echo w) | fdisk /dev/sda
+	# unmount SD
+	umount /dev/sda?
+	rm -rf /mnt/sda?
 
-# unmount SD
-umount /dev/sda?
-rm -rf /mnt/sda?
+	# specify first partition FAT32
+	(echo t; echo 1; echo c; echo w) | fdisk /dev/sda
 
-sleep 5
+	# unmount SD
+	umount /dev/sda?
+	rm -rf /mnt/sda?
 
-# unmount SD
-umount /dev/sda?
-rm -rf /mnt/sda?
+	sleep 5
 
-# format first partition FAT32
-mkfs.vfat /dev/sda1
+	# unmount SD
+	umount /dev/sda?
+	rm -rf /mnt/sda?
 
-sleep 1
+	# format first partition FAT32
+	mkfs.vfat /dev/sda1
 
-# format second partition EXT4
-mkfs.ext4 /dev/sda2
+	sleep 1
 
-# create folder structures
-mkdir -p /mnt/sda1
-mount /dev/sda1 /mnt/sda1
-mkdir -p /mnt/sda1/arduino/www
+	# format second partition EXT4
+	mkfs.ext4 /dev/sda2
 
-# unmount SD
-umount /dev/sda?
-rm -rf /mnt/sda?
+	# create folder structures
+	mkdir -p /mnt/sda1
+	mount /dev/sda1 /mnt/sda1
+	mkdir -p /mnt/sda1/arduino/www
 
-# copy files from flash to folder structure
-mkdir -p /mnt/sda2
-mount /dev/sda2 /mnt/sda2
-rsync -a --exclude=/mnt/ --exclude=/www/sd /overlay/ /mnt/sda2/
+	# unmount SD
+	umount /dev/sda?
+	rm -rf /mnt/sda?
 
-# unmount SD
-umount /dev/sda?
-rm -rf /mnt/sda?
+	# copy files from flash to folder structure
+	mkdir -p /mnt/sda2
+	mount /dev/sda2 /mnt/sda2
+	rsync -a --exclude=/mnt/ --exclude=/www/sd /overlay/ /mnt/sda2/
 
-# update fstab
-uci add fstab mount
-uci set fstab.@mount[0].target=/overlay
-uci set fstab.@mount[0].device=/dev/sda2
-uci set fstab.@mount[0].fstype=ext4
-uci set fstab.@mount[0].enabled=1
-uci set fstab.@mount[0].enabled_fsck=0
-uci set fstab.@mount[0].options=rw,sync,noatime,nodiratime
-uci commit
+	# unmount SD
+	umount /dev/sda?
+	rm -rf /mnt/sda?
 
-# reboot
-reboot
+	# update fstab
+	uci add fstab mount
+	uci set fstab.@mount[0].target=/overlay
+	uci set fstab.@mount[0].device=/dev/sda2
+	uci set fstab.@mount[0].fstype=ext4
+	uci set fstab.@mount[0].enabled=1
+	uci set fstab.@mount[0].enabled_fsck=0
+	uci set fstab.@mount[0].options=rw,sync,noatime,nodiratime
+	uci commit
+
+	# reboot
+	reboot
+
+else
+
+	echo "MicroSD is already setup correctly"
+
+fi
