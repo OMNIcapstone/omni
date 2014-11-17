@@ -1,4 +1,10 @@
-if (! mount | grep ^/dev/sda | grep -q 'on /overlay'); then
+echo "Setting up the MicroSD to be used as filesystem storage. Please wait..."
+
+if [ ! -d /mnt/sda1 ]; then
+
+	echo "MicroSD is not available. Please re-insert, or format as FAT32"
+
+elif (! mount | grep ^/dev/sda | grep -q 'on /overlay'); then
 
 	# install tools
 	opkg update
@@ -80,6 +86,6 @@ if (! mount | grep ^/dev/sda | grep -q 'on /overlay'); then
 
 else
 
-	echo "MicroSD is already setup correctly"
+	echo "MicroSD is already setup correctly. Nothing to do."
 
 fi

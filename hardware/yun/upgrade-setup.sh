@@ -1,3 +1,5 @@
+echo "Upgrading the Yun system. Please wait..."
+
 # install unzip utility
 opkg update
 opkg install unzip
