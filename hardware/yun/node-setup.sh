@@ -21,6 +21,7 @@ opkg install node
 opkg install node-serialport
 
 # enable firmata bridge using precompiled-sketch
+merge-sketch-with-bootloader.lua /mnt/sda1/omni/hardware/yun/sketches/StandardFirmataForATH0/StandardFirmataForATH0.hex
 run-avrdude /mnt/sda1/omni/hardware/yun/sketches/StandardFirmataForATH0/StandardFirmataForATH0.hex
 
 # place node firmata files in global node_modules directory
