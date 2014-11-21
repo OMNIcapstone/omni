@@ -6,6 +6,8 @@ if [ ! -d /mnt/sda1 ]; then
 
 elif (! mount | grep ^/dev/sda | grep -q 'on /overlay'); then
 
+	cd /
+
 	# install tools
 	opkg update
 	opkg install e2fsprogs mkdosfs fdisk rsync
