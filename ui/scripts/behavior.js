@@ -14,7 +14,7 @@ $(document).ready(function(){
 
 var getConfiguration = function() {
 	
-	$.get('//localhost:8080/config', function(data) {
+	$.get('//localhost/config', function(data) {
 
         $('.deviceNameLarge').html(data.deviceName);
 		
@@ -39,7 +39,7 @@ var getConfiguration = function() {
 
 var getBehavior = function() {
 
-	$.get('//localhost:8080/behavior', function(data) {
+	$.get('//localhost/behavior', function(data) {
 		
 		behaviors = data;
 		$('.behavior').not('#behaviorClone').remove();
@@ -134,7 +134,7 @@ var saveBehaviors = function(callback) {
 
     $.ajax({
         
-        url: '//localhost:8080/behavior',
+        url: '//localhost/behavior',
         method: 'POST',
         data: JSON.stringify(behaviors),
         success: function(data, stat, req) {
@@ -155,7 +155,7 @@ var saveBehaviors = function(callback) {
 var getDeviceList = function(callback) {
 
 	// get list of devices
-	$.get('//localhost:8080/deviceList', function(data) {
+	$.get('//localhost/deviceList', function(data) {
 		deviceList = data;
 		if (typeof callback !== 'undefined') callback();
 	});
@@ -184,7 +184,7 @@ var getStatusList = function(deviceIP, moduleName, callback) {
 
 var getCommandList = function(moduleName, callback) {
 
-	$.get('//localhost:8080/' + moduleName + '/command', function(data) {
+	$.get('//localhost/' + moduleName + '/command', function(data) {
 		commandList = data;
 		if (typeof callback !== 'undefined') callback();
 	});

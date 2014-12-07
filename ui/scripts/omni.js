@@ -3,7 +3,7 @@ $('document').ready(function() {
     // get list of devices
     $.ajax({
         
-        url: '//localhost:8080/deviceList',
+        url: '//localhost/deviceList',
         method: 'GET',
         dataType: 'json',
         success: function(data) {

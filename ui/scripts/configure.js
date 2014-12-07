@@ -17,7 +17,7 @@ var multiInit = function(){
 
 var getConfiguration = function() {
 	
-	$.get('//localhost:8080/config', function(data) {
+	$.get('//localhost/config', function(data) {
 		
 		$('#deviceNameLarge').html(data.deviceName);
 		$('#deviceName').val(data.deviceName);
@@ -33,7 +33,7 @@ var getConfiguration = function() {
 
 var getDeviceTypes = function() {
 
-	$.get('//localhost:8080/deviceTypes', function(data) {
+	$.get('//localhost/deviceTypes', function(data) {
 			
 		for (var i = 0; i < data.length; i++) {
 			
@@ -52,7 +52,7 @@ var getDeviceTypes = function() {
 
 var getAvailableModules = function() {
 
-	$.get('//localhost:8080/availableModules', function(data) {
+	$.get('//localhost/availableModules', function(data) {
 			
 		for (var i = 0; i < data.length; i++) {
 			
@@ -77,7 +77,7 @@ var submitForm = function() {
 
     $.ajax({
         
-        url: '//localhost:8080/config',
+        url: '//localhost/config',
         method: 'POST',
         data: JSON.stringify(config),
         success: function(data, stat, req) {
