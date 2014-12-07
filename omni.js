@@ -608,17 +608,18 @@ var httpServer = http.createServer(function (req, res) {
 
 	}
 
+	var headers = {};
+	
+	// IE8 does not allow domains to be specified, just the *
+	// headers["Access-Control-Allow-Origin"] = req.headers.origin;
+	headers['Content-Type'] = 'text/plain';
+	headers["Access-Control-Allow-Origin"] = "*";
+	headers["Access-Control-Allow-Methods"] = "POST, GET, PUT, DELETE, OPTIONS";
+	headers["Access-Control-Allow-Credentials"] = false;
+	headers["Access-Control-Max-Age"] = '86400'; // 24 hours
+	headers["Access-Control-Allow-Headers"] = "X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept";
+
 	if (req.method === 'OPTIONS') {
-
-	      var headers = {};
-
-	      // IE8 does not allow domains to be specified, just the *
-	      // headers["Access-Control-Allow-Origin"] = req.headers.origin;
-	      headers["Access-Control-Allow-Origin"] = "*";
-	      headers["Access-Control-Allow-Methods"] = "POST, GET, PUT, DELETE, OPTIONS";
-	      headers["Access-Control-Allow-Credentials"] = false;
-	      headers["Access-Control-Max-Age"] = '86400'; // 24 hours
-	      headers["Access-Control-Allow-Headers"] = "X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept";
 
 	      res.writeHead(200, headers);
 	      return res.end();
@@ -631,7 +632,7 @@ var httpServer = http.createServer(function (req, res) {
 			fs.readFile('./' + moduleName + '/' + endPoint, function(err, data) {
 	
 				if (err) {
-					res.writeHead(200, {'Content-Type': 'text/plain'});
+					res.writeHead(200, headers);
 					res.write('error');
 					res.write('Invalid request. Page not found.');
 					return res.end();
@@ -646,7 +647,8 @@ var httpServer = http.createServer(function (req, res) {
 				if (endPoint.substring(extIndex) === '.js') contentType = 'text/javascript';
 				if (endPoint.substring(extIndex) === '.css') contentType = 'text/css';
 				
-				res.writeHead(200, {'Content-Type': contentType});
+				headers['Content-Type'] = contentType;
+				res.writeHead(200, headers);
 				res.write(data);
 	        	return res.end();
 	
@@ -672,7 +674,8 @@ var httpServer = http.createServer(function (req, res) {
 				// ensure post data is not too big
 				// otherwise, end the request abruptly
 				if (postData.length > 1e6) {
-					res.writeHead(413, {'Content-Type': 'text/plain'});
+					headers['Content-Type'] = 'text/plain';
+					res.writeHead(413, headers);
 					res.end();
 					req.connection.destroy();
 				}
@@ -689,7 +692,8 @@ var httpServer = http.createServer(function (req, res) {
 
 				} catch(e) {
 
-					res.writeHead(200, {'Content-Type': 'text/plain'});
+					headers['Content-Type'] = 'text/plain';
+					res.writeHead(200, headers);
 					res.write('error');
 					res.write('Invalid POST - request not in JSON format!');
 					return res.end();
@@ -701,7 +705,8 @@ var httpServer = http.createServer(function (req, res) {
 				
 				// make sure username and password are valid
 				if (username === '' || password === '') {
-					res.writeHead(200, {'Content-Type': 'text/plain'});
+					headers['Content-Type'] = 'text/plain';
+					res.writeHead(200, headers);
 					res.write('error');
 					res.write('User or password invalid!');
 					return res.end();
@@ -709,7 +714,8 @@ var httpServer = http.createServer(function (req, res) {
 
 				// make sure user doesn't already exist
 				if (typeof users[username] !== 'undefined') {
-					res.writeHead(200, {'Content-Type': 'text/plain'});
+					headers['Content-Type'] = 'text/plain';
+					res.writeHead(200, headers);
 					res.write('error');
 					res.write('User already exists!');
 					return res.end();
@@ -722,7 +728,8 @@ var httpServer = http.createServer(function (req, res) {
 					// set session
 					sessions[username] = 1;
 					
-					res.writeHead(200, {'Content-Type': 'text/plain'});
+					headers['Content-Type'] = 'text/plain';
+					res.writeHead(200, headers);
 					res.write('success');
 					return res.end();
 
@@ -750,7 +757,8 @@ var httpServer = http.createServer(function (req, res) {
 				// ensure post data is not too big
 				// otherwise, end the request abruptly
 				if (postData.length > 1e6) {
-					res.writeHead(413, {'Content-Type': 'text/plain'});
+					headers['Content-Type'] = 'text/plain';
+					res.writeHead(413, headers);
 					res.end();
 					req.connection.destroy();
 				}
@@ -767,7 +775,8 @@ var httpServer = http.createServer(function (req, res) {
 
 				} catch(e) {
 
-					res.writeHead(200, {'Content-Type': 'text/plain'});
+					headers['Content-Type'] = 'text/plain';
+					res.writeHead(200, headers);
 					res.write('Invalid POST - request not in JSON format!');
 					return res.end();
 
@@ -778,7 +787,8 @@ var httpServer = http.createServer(function (req, res) {
 
 				// make sure username and password are valid
 				if (username === '' || password === '') {
-					res.writeHead(200, {'Content-Type': 'text/plain'});
+					headers['Content-Type'] = 'text/plain';
+					res.writeHead(200, headers);
 					res.write('error');
 					res.write('User or password invalid!');
 					return res.end();
@@ -787,7 +797,8 @@ var httpServer = http.createServer(function (req, res) {
 				// check user credentials
 				if (typeof users[username] === 'undefined' || users[username] !== crypto.createHash('md5').update(password).digest('hex')) {
 					
-					res.writeHead(200, {'Content-Type': 'text/plain'});
+					headers['Content-Type'] = 'text/plain';
+					res.writeHead(200, headers);
 					res.write('error');
 					res.write('Invalid credentials');
 					return res.end();
@@ -796,8 +807,9 @@ var httpServer = http.createServer(function (req, res) {
 				
 				// set session
 				sessions[username] = 1;
-				
-				res.writeHead(200, {'Content-Type': 'text/plain'});
+
+				headers['Content-Type'] = 'text/plain';
+				res.writeHead(200, headers);
 				res.write('success');
 				return res.end();
 
@@ -813,7 +825,8 @@ var httpServer = http.createServer(function (req, res) {
 		
 		if (req.method === 'GET') {
 
-			res.writeHead(200, {'Content-Type': 'text/json'});
+			headers['Content-Type'] = 'text/json';
+			res.writeHead(200, headers);
 			res.write(JSON.stringify(nodeConfig));
         	return res.end();
 
@@ -831,7 +844,8 @@ var httpServer = http.createServer(function (req, res) {
 				// ensure post data is not too big
 				// otherwise, end the request abruptly
 				if (postData.length > 1e6) {
-					res.writeHead(413, {'Content-Type': 'text/plain'});
+					headers['Content-Type'] = 'text/plain';
+					res.writeHead(413, headers);
 					res.end();
 					req.connection.destroy();
 				}
@@ -848,7 +862,8 @@ var httpServer = http.createServer(function (req, res) {
 
 				} catch(e) {
 
-					res.writeHead(200, {'Content-Type': 'text/plain'});
+					headers['Content-Type'] = 'text/plain';
+					res.writeHead(200, headers);
 					res.write('error');
 					res.write('Invalid POST - request not in JSON format!');
 					return res.end();
@@ -859,7 +874,8 @@ var httpServer = http.createServer(function (req, res) {
 				fs.writeFile('./config.json', JSON.stringify(jsonPostData), function(err) {
 					
 					if (err) {
-						res.writeHead(200, {'Content-Type': 'text/plain'});
+						headers['Content-Type'] = 'text/plain';
+						res.writeHead(200, headers);
 						res.write('error');
 						res.write('Unable to save configuration file to disk!');
 						return res.end();
@@ -871,7 +887,8 @@ var httpServer = http.createServer(function (req, res) {
 
 					// need to fix - and unload previous modules
 
-					res.writeHead(200, {'Content-Type': 'text/plain'});
+					headers['Content-Type'] = 'text/plain';
+					res.writeHead(200, headers);
 					res.write('success');
 					return res.end();
 
@@ -889,7 +906,8 @@ var httpServer = http.createServer(function (req, res) {
 
 		if (req.method === 'GET') {
 
-			res.writeHead(200, {'Content-Type': 'text/json'});
+			headers['Content-Type'] = 'text/json';
+			res.writeHead(200, headers);
 			res.write(JSON.stringify(nodeRuleSet));
         	return res.end();
 
@@ -907,7 +925,8 @@ var httpServer = http.createServer(function (req, res) {
 				// ensure post data is not too big
 				// otherwise, end the request abruptly
 				if (postData.length > 1e6) {
-					res.writeHead(413, {'Content-Type': 'text/plain'});
+					headers['Content-Type'] = 'text/plain';
+					res.writeHead(413, headers);
 					res.end();
 					req.connection.destroy();
 				}
@@ -924,7 +943,8 @@ var httpServer = http.createServer(function (req, res) {
 
 				} catch(e) {
 
-					res.writeHead(200, {'Content-Type': 'text/plain'});
+					headers['Content-Type'] = 'text/plain';
+					res.writeHead(200, headers);
 					res.write('error');
 					res.write('Invalid POST - request not in JSON format!');
 					return res.end();
@@ -935,7 +955,8 @@ var httpServer = http.createServer(function (req, res) {
 				fs.writeFile('./ruleset.json', JSON.stringify(jsonPostData), function(err) {
 					
 					if (err) {
-						res.writeHead(200, {'Content-Type': 'text/plain'});
+						headers['Content-Type'] = 'text/plain';
+						res.writeHead(200, headers);
 						res.write('error');
 						res.write('Unable to save behavior file to disk!');
 						return res.end();
@@ -944,7 +965,8 @@ var httpServer = http.createServer(function (req, res) {
 					// replace current node behavior
 					nodeRuleSet = jsonPostData;
 
-					res.writeHead(200, {'Content-Type': 'text/plain'});
+					headers['Content-Type'] = 'text/plain';
+					res.writeHead(200, headers);
 					res.write('success');
 					res.write('Behavior file saved to disk');
 					return res.end();
@@ -963,7 +985,8 @@ var httpServer = http.createServer(function (req, res) {
 
 		if (req.method === 'GET') {
 
-			res.writeHead(200, {'Content-Type': 'text/json'});
+			headers['Content-Type'] = 'text/json';
+			res.writeHead(200, headers);
 			res.write(JSON.stringify(nodeDeviceTypes));
 			return res.end();
 
@@ -977,7 +1000,8 @@ var httpServer = http.createServer(function (req, res) {
 
 		if (req.method === 'GET') {
 
-			res.writeHead(200, {'Content-Type': 'text/json'});
+			headers['Content-Type'] = 'text/json';
+			res.writeHead(200, headers);
 			res.write(JSON.stringify(nodeList));
 			return res.end();
 
@@ -994,13 +1018,14 @@ var httpServer = http.createServer(function (req, res) {
 			fs.readdir('./lib/omni_modules/', function(err, files) {
 
 				if (err) {
-					res.writeHead(200, {'Content-Type': 'text/plain'});
-					res.write('error');
+					headers['Content-Type'] = 'text/plain';
+					res.writeHead(200, headers);
 					res.write('Unable to load list of modules!');
 					return res.end();
 				}
 
-				res.writeHead(200, {'Content-Type': 'text/json'});
+				headers['Content-Type'] = 'text/json';
+				res.writeHead(200, headers);
 				res.write(JSON.stringify(files));
 				return res.end();
 
@@ -1023,7 +1048,8 @@ var httpServer = http.createServer(function (req, res) {
 		if (req.method === 'GET') {
 		    
 		    // send the status to the client
-			res.writeHead(200, {'Content-Type': 'text/json'});
+			headers['Content-Type'] = 'text/json';
+			res.writeHead(200, headers);
 			res.write(JSON.stringify(nodeModules[moduleName].getState() || null));
 			return res.end();
 
@@ -1044,7 +1070,8 @@ var httpServer = http.createServer(function (req, res) {
 		if (req.method === 'GET') {
 		    
 		    // send the status to the client
-			res.writeHead(200, {'Content-Type': 'text/json'});
+			headers['Content-Type'] = 'text/json';
+			res.writeHead(200, headers);
 			res.write(JSON.stringify(nodeModules[moduleName].getStatusList() || null));
 			return res.end();
 
@@ -1068,7 +1095,8 @@ var httpServer = http.createServer(function (req, res) {
 			fs.readFile('./lib/omni_modules/' + moduleName + '/monitor.html', function(err, data) {
 
 				if (err) {
-					res.writeHead(200, {'Content-Type': 'text/plain'});
+					headers['Content-Type'] = 'text/plain';
+					res.writeHead(200, headers);
 					res.write('error');
 					res.write('No monitor file for specified node module.');
 					return res.end();
@@ -1078,7 +1106,8 @@ var httpServer = http.createServer(function (req, res) {
 				data = data.toString().replace(/localhost/g, domain);
 
 				// send the data to the client
-				res.writeHead(200, {'Content-Type': 'text/html'});
+				headers['Content-Type'] = 'text/html';
+				res.writeHead(200, headers);
 				res.write(data);
 	        	return res.end();
 
@@ -1104,7 +1133,8 @@ var httpServer = http.createServer(function (req, res) {
 		    var commandList = JSON.parse(JSON.stringify(nodeModules[moduleName].getCommandListNoMethods()));
 
 			// send the command list to the client
-			res.writeHead(200, {'Content-Type': 'text/json'});
+			headers['Content-Type'] = 'text/json';
+			res.writeHead(200, headers);
 			res.write(JSON.stringify(commandList));
         	return res.end();
 
@@ -1122,7 +1152,8 @@ var httpServer = http.createServer(function (req, res) {
 				// ensure post data is not too big
 				// otherwise, end the request abruptly
 				if (postData.length > 1e6) {
-					res.writeHead(413, {'Content-Type': 'text/plain'});
+					headers['Content-Type'] = 'text/plain';
+					res.writeHead(413, headers);
 					res.end();
 					req.connection.destroy();
 				}
@@ -1140,7 +1171,8 @@ var httpServer = http.createServer(function (req, res) {
 
 				} catch(e) {
 
-					res.writeHead(200, {'Content-Type': 'text/plain'});
+					headers['Content-Type'] = 'text/plain';
+					res.writeHead(200, headers);
 					res.write('error');
 					res.write('Invalid POST - request not in JSON format!');
 					return res.end();
@@ -1153,7 +1185,8 @@ var httpServer = http.createServer(function (req, res) {
 				// check that requested command is valid
 				if (Object.keys(nodeModules[moduleName].getCommandList()).indexOf(commandName) === -1) {
 
-					res.writeHead(200, {'Content-Type': 'text/plain'});
+					headers['Content-Type'] = 'text/plain';
+					res.writeHead(200, headers);
 					res.write('error');
 					res.write('Invalid POST - command given is invalid!');
 					return res.end();
@@ -1163,7 +1196,8 @@ var httpServer = http.createServer(function (req, res) {
 				// ensure command data is a valid type
 				if (!(commandData instanceof Object)) {
 
-					res.writeHead(200, {'Content-Type': 'text/plain'});
+					headers['Content-Type'] = 'text/plain';
+					res.writeHead(200, headers);
 					res.write('error');
 					res.write('Invalid POST - command data not in JSON format!');
 					return res.end();
@@ -1172,7 +1206,8 @@ var httpServer = http.createServer(function (req, res) {
 
 				// check that the requested command method has been defined
 				if (typeof nodeModules[moduleName].getCommandList()[commandName].method === 'undefined') {
-					res.writeHead(200, {'Content-Type': 'text/plain'});
+					headers['Content-Type'] = 'text/plain';
+					res.writeHead(200, headers);
 					res.write('error');
 					res.write('Invalid command - this command has not been implemented!');
 					return res.end();
@@ -1187,7 +1222,8 @@ var httpServer = http.createServer(function (req, res) {
 					if (typeof commandData[commandParameters[i].name] === 'undefined') {
 						
 						if (commandParameters[i].required) {
-							res.writeHead(200, {'Content-Type': 'text/plain'});
+							headers['Content-Type'] = 'text/plain';
+							res.writeHead(200, headers);
 							res.write('error');
 							res.write('Invalid command - some required parameters are missing!');
 							res.write(util.inspect(commandParameters[i], {showHidden: false, depth: null, colors: true}));
@@ -1215,7 +1251,8 @@ var httpServer = http.createServer(function (req, res) {
     
     else {
         
-		res.writeHead(200, {'Content-Type': 'text/plain'});
+		headers['Content-Type'] = 'text/plain';
+		res.writeHead(200, headers);
 		res.write('error');
 		res.write('Invalid request');
         return res.end();
