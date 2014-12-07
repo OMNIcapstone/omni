@@ -14,7 +14,7 @@ $(document).ready(function(){
 
 var getConfiguration = function() {
 	
-	$.get('//localhost/config', function(data) {
+	$.get('//localhost:8080/config', function(data) {
 
         $('.deviceNameLarge').html(data.deviceName);
 		
@@ -39,7 +39,7 @@ var getConfiguration = function() {
 
 var getBehavior = function() {
 
-	$.get('//localhost/behavior', function(data) {
+	$.get('//localhost:8080/behavior', function(data) {
 		
 		behaviors = data;
 		$('.behavior').not('#behaviorClone').remove();
@@ -134,7 +134,7 @@ var saveBehaviors = function(callback) {
 
     $.ajax({
         
-        url: '//localhost/behavior',
+        url: '//localhost:8080/behavior',
         method: 'POST',
         data: JSON.stringify(behaviors),
         success: function(data, stat, req) {
@@ -155,7 +155,7 @@ var saveBehaviors = function(callback) {
 var getDeviceList = function(callback) {
 
 	// get list of devices
-	$.get('//localhost/deviceList', function(data) {
+	$.get('//localhost:8080/deviceList', function(data) {
 		deviceList = data;
 		if (typeof callback !== 'undefined') callback();
 	});
@@ -165,7 +165,7 @@ var getDeviceList = function(callback) {
 
 var getAvailableModules = function(deviceIP, callback) {
 
-	$.get('//' + deviceIP + '/config', function(data) {
+	$.get('//' + deviceIP + ':8080/config', function(data) {
 
 		availableModules = data.nodeModules;
 		if (typeof callback !== 'undefined') callback();
@@ -175,7 +175,7 @@ var getAvailableModules = function(deviceIP, callback) {
 
 var getStatusList = function(deviceIP, moduleName, callback) {
 
-	$.get('//' + deviceIP + '/' + moduleName + '/statusList', function(data) {
+	$.get('//' + deviceIP + ':8080/' + moduleName + '/statusList', function(data) {
 		statusList = data;
 		if (typeof callback !== 'undefined') callback();
 	});
@@ -184,7 +184,7 @@ var getStatusList = function(deviceIP, moduleName, callback) {
 
 var getCommandList = function(moduleName, callback) {
 
-	$.get('//localhost/' + moduleName + '/command', function(data) {
+	$.get('//localhost:8080/' + moduleName + '/command', function(data) {
 		commandList = data;
 		if (typeof callback !== 'undefined') callback();
 	});
@@ -195,17 +195,17 @@ var prepareAddBehavior = function() {
 
 	getDeviceList(function() {
 		
-            var nodeKeys = Object.keys(deviceList);
+        var nodeKeys = Object.keys(deviceList);
 
-            for (var i = 0, j = nodeKeys.length; i < j; i++) {
+        for (var i = 0, j = nodeKeys.length; i < j; i++) {
 
-		var sourceNode = $('<option></option>');
-		sourceNode.val(nodeKeys[i]);
-		sourceNode.html(deviceList[nodeKeys[i]].name);
+			var sourceNode = $('<option></option>');
+			sourceNode.val(nodeKeys[i]);
+			sourceNode.html(deviceList[nodeKeys[i]].name);
 		
-		$('#sourceNodeName').append(sourceNode);
+			$('#sourceNodeName').append(sourceNode);
 		
-            }
+        }
 
 	});
 	
@@ -214,7 +214,7 @@ var prepareAddBehavior = function() {
 var changedSourceNodeName = function() {
 	
 	var sourceNodeIP = $('#sourceNodeName').val();
-	sourceNodeIP = 'localhost';
+
 	getAvailableModules(sourceNodeIP, function() {
 			
 		$('#sourceNodeModule').empty();
@@ -239,9 +239,7 @@ var changedOperator = function() {
 	
 	var sourceNodeIP = $('#sourceNodeName').val();
 	var module = $('#sourceNodeModule').val();
-	
-	sourceNodeIP = 'localhost';
-	
+
 	getStatusList(sourceNodeIP, module, function() {
 			
 		$('#sourceNodeComparableValue').empty();

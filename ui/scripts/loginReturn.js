@@ -5,7 +5,7 @@ var submitForm = function() {
 
     $.ajax({
         
-        url: '//localhost/login',
+        url: '//localhost:8080/login',
         method: 'POST',
         data: JSON.stringify({username: username, password: password}),
         success: function(data, stat, req) {

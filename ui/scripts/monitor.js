@@ -8,7 +8,7 @@ $(document).ready(function(){
 
 var getConfiguration = function() {
 	
-	$.get('//localhost/config', function(data) {
+	$.get('//localhost:8080/config', function(data) {
 
         $('#deviceNameLarge').html(data.deviceName);
 		
@@ -30,7 +30,7 @@ var getMonitors = function() {
 	    var monitor = $('#monitorClone').clone();
 	    monitor.attr('id', '');
 	    monitor.attr('class', 'monitor');
-	    monitor.attr('src', '//localhost/' + modules[i] + '/monitor');
+	    monitor.attr('src', '//localhost:8080/' + modules[i] + '/monitor');
 
 	    monitor.load(function() {
 	    	$(this).css('height', this.contentWindow.document.body.scrollHeight);
