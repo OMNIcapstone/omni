@@ -1,0 +1,65 @@
+<html>
+<head>
+	<title>OMNI | Configure Device</title>
+	<meta charset="utf-8">
+	<meta name="description" content="Home Monitoring Website">
+	<link rel="stylesheet" type="text/css" href="styles/omni.css">
+	<link rel="stylesheet" type="text/css" href="styles/configure.css">
+	<link rel="stylesheet" type="text/css" href="styles/multi-select.css">
+</head>
+
+<body>
+<!-- Start Content -->
+	<div class="page">
+
+<!-- Start Header -->
+		<div id="header">
+			<div id="title"><a class="headerLink" href="omni.html">OMNI</a>
+				<div id="subtitle">Keeping An Eye On Things For You
+					<div id="headerLinks"><a class="headerLink" href="omni.html">Device List</a>  |  <a class="headerLink" href="loginReturn.html">Log Out</a>
+					</div>
+				</div>
+			</div>
+		</div>
+<!-- End Header -->
+
+<!-- Start Main Content -->	
+		<div>
+			<div class="col wideCol">
+				<div class="colTitle">Configure Device  -  <span id="deviceNameLarge"></span></div>
+				<hr class="fade">
+				<form name="configure" accept-charset="utf-8">
+					<ul>
+						<li>
+							<label for="deviceName">Device Name</label>
+							<input type="text" id="deviceName" name="deviceName" placeholder="Device name here" required>
+						</li><br>
+						<li>
+							<label for="devType">Device Type</label>
+							<select id="devType" required>
+								<option selected disabled>Choose Device Type</option>
+							</select>
+						</li><br>
+						<li>
+							<label for="module">Modules to Load</label>
+							<select id="moduleSelect" multiple="multiple"></select>
+						</li><br>
+						<li>
+							<input type="button" value="Save" onclick="submitForm()">
+						</li>
+					</ul>
+				</form>
+			</div>
+		</div>
+<!-- End Content -->
+	</div>
+
+<!-- Scripts -->
+	<div id="scripts">
+		<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+		<script type="text/javascript" src="scripts/jquery.multi-select.js"></script>
+		<script type="text/javascript" src="scripts/configure.js"></script>	
+	</div>
+
+</body>
+</html>

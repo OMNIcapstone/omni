@@ -1,0 +1,56 @@
+<html>
+<head>
+	<title>OMNI | Log In</title>
+	<meta charset="utf-8">
+	<meta name="description" content="Home Monitoring Website">
+	<link rel="stylesheet" type="text/css" href="styles/omni.css">
+	<link rel="stylesheet" type="text/css" href="styles/login.css">
+</head>
+
+<body>
+<!-- Start Content -->
+	<div class="page">
+
+<!-- Start Header -->
+		<div id="header">
+			<div id="title"><a class="headerLink" href="">OMNI</a>
+				<div id="subtitle">Keeping An Eye On Things For You
+				</div>
+			</div>
+		</div>
+<!-- End Header -->
+
+<!-- Start Main Content -->	
+		<div>
+			<div class="returnCol loginCol">
+				<div class="colTitle">Have an Account? Sign In!</div>
+				<hr class="fade">
+				<div class="loginForm">
+					<form name="login" action="omni.html" method="get" accept-charset="utf-8">
+						<ul>
+							<li>
+								<label for="username">Username</label>
+								<input type="text" id="username" name="username" placeholder="name" required>
+							</li>
+							<li>
+								<label for="password">Password</label>
+								<input type="password" id="password" name="password" placeholder="password" required></li>
+							<li>
+								<input type="button" value="Login" onclick="submitForm()">
+							</li>
+						</ul>
+					</form>
+				</div>
+			</div>
+		</div>
+<!-- End Content -->
+	</div>
+
+<!-- Scripts -->
+	<div id="scripts">
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<script type="text/javascript" src="scripts/loginReturn.js"></script>	
+	</div>
+
+</body>
+</html>

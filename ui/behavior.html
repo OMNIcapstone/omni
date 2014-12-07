@@ -1,0 +1,119 @@
+<html>
+<head>
+	<title>OMNI | Device Behavior</title>
+	<meta charset="utf-8">
+	<meta name="description" content="Home Monitoring Website">
+	<link rel="stylesheet" type="text/css" href="styles/omni.css">
+	<link rel="stylesheet" type="text/css" href="styles/behavior.css">
+	
+</head>
+
+<body>
+<!-- Start Content -->
+	<div class="page">
+
+<!-- Start Header -->
+		<div id="header">
+			<div id="title"><a class="headerLink" href="omni.html">OMNI</a>
+				<div id="subtitle">Keeping An Eye On Things For You
+					<div id="headerLinks"><a class="headerLink" href="omni.html">Device List</a>  |  <a class="headerLink" href="loginReturn.html">Log Out</a>
+					</div>
+				</div>
+			</div>
+		</div>
+<!-- End Header -->
+
+<!-- Start Main Content -->	
+		<div>
+			<div class="col wideCol">
+				<div class="colTitle">Device Behavior  -  <span class="deviceNameLarge"></span></div>
+				<hr class="fade">
+				<div id="behaviors">
+				
+					<table id="behaviorClone" class="behavior">
+					  <tr>
+						<td class="left behaviorHTML"></td>
+						<td class="right"><input type="button" value="Delete" class="delete"></td>
+					  </tr>
+					</table>
+					
+				</div>
+
+				<form name="behaviorForm" action="" method="post" accept-charset="utf-8">
+					<ul>
+						IF:
+						<li>		
+							<select id="sourceNodeName" name="device1" class="idk" onchange="changedSourceNodeName()">
+								<option selected disabled>Choose Device</option>
+							</select>
+						</li>
+						<li>
+							<select id="sourceNodeModule" name="module1" class="idk">
+								<option selected disabled>Choose Module</option>
+							</select>
+						</li>
+						<li>
+							<select id="sourceNodeComparableField" name="service" class="idk">
+								<option selected disabled>Choose Service</option>
+								<option value="status">Status</option>
+								<option value="data">Data</option>
+							</select>
+						</li>
+						<li>
+							<select id="sourceNodeComparableOperator" name="comparison" class="idk" onchange="changedOperator()">
+								<option selected disabled>Choose Comparison</option>
+								<option value="NA">Doesn't Matter</option>
+								<option value="LT">Is Less Than</option>
+								<option value="LTE">Is Less Than Or Equal To</option>
+								<option value="EQ">Is Equal To</option>
+								<option value="GTE">Is Greater Than Or Equal To</option>
+								<option value="GT">Is Greater Than</option>
+								<option value="BETWEEN_INC">Is Between Inclusively</option>
+								<option value="BETWEEN_EXC">Is Between Exclusively</option>
+							</select>
+						</li>
+						<li>
+							<select id="sourceNodeComparableValue" name="value" class="idk">
+								<option selected disabled>Choose Value</option>
+								<option>ON</option>
+								<option>OFF</option>
+							</select>
+						</li><br>
+						<br/><br/>THEN: 
+						<li><span class="deviceNameLarge"></span>
+						</li>
+						<li>
+							<select id="destNodeModule" name="module2" class="idk" onchange="changedDestNodeModule()">
+								<option selected disabled>Choose Module</option>
+							</select>
+						</li>
+						<li>
+							<select id="destNodeCommandName" name="action" class="idk" onchange="loadCommandParams()">
+								<option selected disabled>Choose Action</option>
+							</select>
+						</li>
+						<br/><br/>WITH PARAMETERS: <br/><br/>
+						<li id="commandParams"></li>
+						<br/>REPEAT EVERY: 
+						<li>
+							<input type="text" name="time" id="execTriggerDelayMS" placeholder="Time To Repeat Action After (ex: 1000)" required>
+						</li>
+						ms
+						<li>
+							<input type="button" value="Add To Behavior List" onclick="addBehavior()">
+						</li>
+					</ul>
+				</form>
+			</div>
+		</div>
+<!-- End Content -->
+	</div>
+
+<!-- Scripts -->
+	<div id="scripts">
+		<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+		<script type="text/javascript" src="scripts/behavior.js"></script>	
+	</div>
+
+</body>
+</html>

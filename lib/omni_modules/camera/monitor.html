@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head></head>
+    <body>
+        <h2>Camera Module</h2>
+        <p>Status: <span id="status"></span></p>
+        <p>Data: <span id="data"></span></p>
+        
+        <video width="320" height="240" controls>
+            <src source='//localhost/:8081' type='video/mp4'/>
+        </video>
+
+        <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+        <script>
+            $('document').ready(function() {
+                
+                $.get('//localhost/camera/state', function(data) {
+
+                    $('#status').html(data.status);
+                    $('#data').html(data.data || 'null');
+        
+                });
+                
+            });
+        </script>
+    </body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <head></head>
+    <body>
+        <h2>Dummy Sensor</h2>
+        <p>Status: <span id="status"></span></p>
+        <p>Data: <span id="data"></span></p>
+
+        <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+        <script>
+            $('document').ready(function() {
+                
+                $.get('//localhost/dummy-sensor/state', function(data) {
+
+                    $('#status').html(data.status);
+                    $('#data').html(data.data || 'null');
+        
+                });
+
+            });
+        </script>
+    </body>
+</html>

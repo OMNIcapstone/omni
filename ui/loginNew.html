@@ -1,0 +1,60 @@
+<html>
+<head>
+	<title>OMNI | Log In</title>
+	<meta charset="utf-8">
+	<meta name="description" content="Home Monitoring Website">
+	<link rel="stylesheet" type="text/css" href="styles/omni.css">
+	<link rel="stylesheet" type="text/css" href="styles/login.css">
+</head>
+
+<body>
+<!-- Start Content -->
+	<div class="page">
+
+<!-- Start Header -->
+		<div id="header">
+			<div id="title"><a class="headerLink" href="">OMNI</a>
+				<div id="subtitle">Keeping An Eye On Things For You
+				</div>
+			</div>
+		</div>
+<!-- End Header -->
+
+<!-- Start Main Content -->	
+		<div>
+			<div class="newCol loginCol">
+				<div class="colTitle">New to OMNI? Create an account!</div>
+				<hr class="fade">
+				<div class="signupForm">
+					<form name="signup" accept-charset="utf-8">
+						<ul>
+							<li>
+								<label for="username">Username</label>
+								<input type="text" name="username" id="username" placeholder="name" required>
+							</li>
+							<li>
+								<label for="password">Password</label>
+								<input type="password" name="password" id="password" placeholder="password" required>
+							</li>
+							<li>
+								<label for="confirmPassword">Confirm Password</label>
+								<input type="password" name="confirmPassword" id="confirmPassword" placeholder="password" required></li>
+							<li>
+								<input type="button" value="Sign Me Up" onclick="submitForm()">
+							</li>
+						</ul>
+					</form>
+				</div>
+			</div>
+		</div>
+<!-- End Content -->
+	</div>
+
+<!-- Scripts -->
+	<div id="scripts">
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<script type="text/javascript" src="scripts/loginNew.js"></script>	
+	</div>
+
+</body>
+</html>

@@ -1,0 +1,40 @@
+label {
+	display:block;
+}
+form{
+	width:75%;
+	font-size:20px;
+	margin:50px auto;
+	padding:25px;
+	background-color:rgba(250,250,250,0.5);
+	border-radius:5px;
+    box-shadow:0px 0px 5px 0px rgba(0, 0, 0, 0.2), inset 0px 1px 0px 0px rgba(250, 250, 250, 0.5);
+    border:1px solid rgba(0, 0, 0, 0.3);
+}
+ul {
+	padding:0;
+	margin:0;
+}
+li {
+	display:block;
+}
+input:not([type=submit]) {
+	padding:5px;
+	width:100%;
+	border:1px solid rgba(0, 0, 0, 0.3);
+	border-radius:3px;
+	box-shadow:inset 0px 1px 3px 0px rgba(0, 0, 0, 0.1), 0px 1px 0px 0px rgba(250, 250, 250, 0.5) ;
+}
+input[type=submit] {
+	border:1px solid rgba(0, 0, 0, 0.3);
+	background:#64c8ef;
+	background:-webkit-gradient(linear, left top, left bottom, from(#b0c0ff), to(#6A7BBD));
+	color:#fff;
+	display:block;
+	padding:5px 15px;
+	margin-right:0;
+	margin-top:20px;
+	font-size:18px;
+	border-radius:3px;
+	text-shadow:1px 1px 0px rgba(0, 0, 0, 0.3);
+}

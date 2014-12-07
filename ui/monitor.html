@@ -1,0 +1,44 @@
+<html>
+<head>
+	<title>OMNI | Monitor Device</title>
+	<meta charset="utf-8">
+	<meta name="description" content="Home Monitoring Website">
+	<link rel="stylesheet" type="text/css" href="styles/omni.css">
+	<link rel="stylesheet" type="text/css" href="styles/monitor.css">
+</head>
+
+<body>
+<!-- Start Content -->
+	<div class="page">
+
+<!-- Start Header -->
+		<div id="header">
+			<div id="title"><a class="headerLink" href="omni.html">OMNI</a>
+				<div id="subtitle">Keeping An Eye On Things For You
+					<div id="headerLinks"><a class="headerLink" href="omni.html">Device List</a>  |  <a class="headerLink" href="loginReturn.html">Log Out</a>
+					</div>
+				</div>
+			</div>
+		</div>
+<!-- End Header -->
+
+<!-- Start Main Content -->	
+		<div>
+			<div id="monitors" class="col wideCol">
+				<div class="colTitle">Monitor Device  -  <span id="deviceNameLarge"></span></div>
+				<hr class="fade">
+				<iframe id="monitorClone"></iframe>
+			</div>
+		</div>
+<!-- End Content -->
+
+	</div>
+
+<!-- Scripts -->
+	<div id="scripts">
+		<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+		<script type="text/javascript" src="scripts/monitor.js"></script>	
+	</div>
+
+</body>
+</html>
