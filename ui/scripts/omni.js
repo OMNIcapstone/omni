@@ -16,9 +16,9 @@ $('document').ready(function() {
                 device.removeAttr('id');
                 device.find('.name').html(data[nodeKeys[i]].name);
                 device.find('.ip').html(nodeKeys[i]);
-                device.find('.config').attr('href', '//' + nodeKeys[i] + ':8080/configure.html');
-                device.find('.behavior').attr('href', '//' + nodeKeys[i] + ':8080/behavior.html');
-                device.find('.monitor').attr('href', '//' + nodeKeys[i] + ':8080/monitor.html');
+                device.find('.config').attr('href', '//' + nodeKeys[i] + ':8080/ui/configure.html');
+                device.find('.behavior').attr('href', '//' + nodeKeys[i] + ':8080/ui/behavior.html');
+                device.find('.monitor').attr('href', '//' + nodeKeys[i] + ':8080/ui/monitor.html');
                 
                 $('#deviceTable').append(device);
                 
