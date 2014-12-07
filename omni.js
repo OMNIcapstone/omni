@@ -597,7 +597,7 @@ var httpServer = http.createServer(function (req, res) {
 		if (moduleName === null) {
 			
 			res.writeHead(301, {
-	  			'Location': '/ui/loginNew.html'
+	  			'Location': '/ui/loginReturn.html'
 			});
 			return res.end();
 			

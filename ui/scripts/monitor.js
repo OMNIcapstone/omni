@@ -41,5 +41,3 @@ var getMonitors = function() {
     }
     
 };
-
-//setInterval(getMonitors, 5000);

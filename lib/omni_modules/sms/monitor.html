@@ -9,13 +9,17 @@
         <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
         <script>
             $('document').ready(function() {
-                
-                $.get('//localhost/email/state', function(data) {
 
-                    $('#status').html(data.status);
-                    $('#data').html(data.data || 'null');
+                setInterval(function() {
+
+                	$.get('//localhost/sms/state', function(data) {
+
+                    	$('#status').html(data.status);
+                    	$('#data').html(data.data || 'null');
         
-                });
+                	});
+
+                }, 1000);
 
             });
         </script>

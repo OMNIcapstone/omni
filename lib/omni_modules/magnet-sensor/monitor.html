@@ -10,12 +10,16 @@
         <script>
             $('document').ready(function() {
                 
-                $.get('//localhost/magnet-sensor/state', function(data) {
+                setInterval(function() {
 
-                    $('#status').html(data.status);
-                    $('#data').html(data.data || 'null');
+                	$.get('//localhost/magnet-sensor/state', function(data) {
+
+                    	$('#status').html(data.status);
+                    	$('#data').html(data.data || 'null');
         
-                });
+                	});
+
+                }, 1000);
 
             });
         </script>
