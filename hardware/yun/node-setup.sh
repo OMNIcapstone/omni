@@ -37,6 +37,9 @@ if (! grep -q \#ttyATH0 /etc/inittab); then
 	sed -i 's/ttyATH0/#ttyATH0/' /etc/inittab;
 fi
 
+# replace startup script
+cp -r /mnt/sda1/omni/hardware/yun/rc.local /etc/rc.local
+
 # change hostname
 read -p "What should the hostname be for this node? (no spaces, default = arduino): " hostname
 hostname="${hostname:-arduino}"
