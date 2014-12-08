@@ -6,9 +6,7 @@
         <p>Status: <span id="status"></span></p>
         <p>Data: <span id="data"></span></p>
         
-        <video width="320" height="240" controls>
-            <src source='//localhost/:8081' type='video/mp4'/>
-        </video>
+        <img src="" height="480" width="640"/>
 
         <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
         <script>
@@ -18,8 +16,13 @@
 
                 	$.get('//localhost/camera/state', function(data) {
 
-                    	$('#status').html(data.status);
-                    	$('#data').html(data.data || 'null');
+                    		$('#status').html(data.status);
+                    		$('#data').html(data.data || 'null');
+
+				if (data.status === 'ON') {
+					$('img').attr('src', 'http://' + data.data);
+				}
+				else $('img').attr('src', "");
         
                 	});
 

@@ -2,7 +2,7 @@
 # the system init finished. By default this file does nothing.
 
 cd /mnt/sda1/omni/
-node omni.js
+node omni.js &
 
 wifi-live-or-reset
 boot-complete-notify
@@ -10,7 +10,7 @@ boot-complete-notify
 # Uncomment the following line in order to reset the microntroller
 # right after linux becomes ready
 
-#reset-mcu
+reset-mcu
 
 # Uncomment the following line in order to disable kernel console
 # debug messages, thus having a silent and clean serial communication
