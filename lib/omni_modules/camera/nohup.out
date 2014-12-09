@@ -1,0 +1,7 @@
+[-1242458464] [NTC] [ALL] conf_load: Processing thread 0 - config file /home/pi/motion-mmalcam.conf
+[-1242458464] [NTC] [ALL] motion_startup: Motion mmaltest Started
+[-1242458464] [NTC] [ALL] motion_startup: Logging to file (/home/pi/mmal/motion.log)
+mmal: mmal_vc_component_enable: failed to enable component: ENOSPC
+[-1242937696] [NTC] [ALL] conf_load: Processing thread 0 - config file /home/pi/motion-mmalcam.conf
+[-1242937696] [NTC] [ALL] motion_startup: Motion mmaltest Started
+[-1242937696] [NTC] [ALL] motion_startup: Logging to file (/home/pi/mmal/motion.log)
