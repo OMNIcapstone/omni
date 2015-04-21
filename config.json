@@ -1,1 +1,6 @@
-{"deviceName":"Generic Test Device","deviceType":"Arduino Yun","nodeModules":["camera","central-server","email","sms"],"hardware":""}
+{
+    "deviceName": "Generic Test Device",
+    "deviceType": "Arduino Yun",
+    "nodeModules": ["camera", "central-server", "email", "sms"],
+    "hardware": ""
+}
