@@ -1,48 +1,52 @@
 <html>
+
 <head>
 	<title>OMNI | Device Behavior</title>
 	<meta charset="utf-8">
 	<meta name="description" content="Home Monitoring Website">
 	<link rel="stylesheet" type="text/css" href="styles/omni.css">
 	<link rel="stylesheet" type="text/css" href="styles/behavior.css">
-	
 </head>
 
 <body>
-<!-- Start Content -->
+
+	<!-- Start Content -->
 	<div class="page">
 
-<!-- Start Header -->
+		<!-- Start Header -->
 		<div id="header">
 			<div id="title"><a class="headerLink" href="omni.html">OMNI</a>
 				<div id="subtitle">Keeping An Eye On Things For You
-					<div id="headerLinks"><a class="headerLink" href="omni.html">Device List</a>  |  <a class="headerLink" href="loginReturn.html">Log Out</a>
+					<div id="headerLinks"><a class="headerLink" href="omni.html">Device List</a> | <a class="headerLink" href="loginReturn.html">Log Out</a>
 					</div>
 				</div>
 			</div>
 		</div>
-<!-- End Header -->
+		<!-- End Header -->
 
-<!-- Start Main Content -->	
+		<!-- Start Main Content -->
 		<div>
 			<div class="col wideCol">
-				<div class="colTitle">Device Behavior  -  <span class="deviceNameLarge"></span></div>
+				<div class="colTitle">Device Behavior - <span class="deviceNameLarge"></span>
+				</div>
 				<hr class="fade">
 				<div id="behaviors">
-				
+
 					<table id="behaviorClone" class="behavior">
-					  <tr>
-						<td class="left behaviorHTML"></td>
-						<td class="right"><input type="button" value="Delete" class="delete"></td>
-					  </tr>
+						<tr>
+							<td class="left behaviorHTML"></td>
+							<td class="right">
+								<input type="button" value="Delete" class="delete">
+							</td>
+						</tr>
 					</table>
-					
+
 				</div>
 
 				<form name="behaviorForm" action="" method="post" accept-charset="utf-8">
 					<ul>
 						IF:
-						<li>		
+						<li>
 							<select id="sourceNodeName" name="device1" class="idk" onchange="changedSourceNodeName()">
 								<option selected disabled>Choose Device</option>
 							</select>
@@ -78,8 +82,10 @@
 								<option>ON</option>
 								<option>OFF</option>
 							</select>
-						</li><br>
-						<br/><br/>THEN: 
+						</li>
+						<br>
+						<br/>
+						<br/>THEN:
 						<li><span class="deviceNameLarge"></span>
 						</li>
 						<li>
@@ -92,9 +98,12 @@
 								<option selected disabled>Choose Action</option>
 							</select>
 						</li>
-						<br/><br/>WITH PARAMETERS: <br/><br/>
+						<br/>
+						<br/>WITH PARAMETERS:
+						<br/>
+						<br/>
 						<li id="commandParams"></li>
-						<br/>REPEAT EVERY: 
+						<br/>REPEAT EVERY:
 						<li>
 							<input type="text" name="time" id="execTriggerDelayMS" placeholder="Time To Repeat Action After (ex: 1000)" required>
 						</li>
@@ -106,14 +115,17 @@
 				</form>
 			</div>
 		</div>
-<!-- End Content -->
-	</div>
+		<!-- End Main Content -->
 
-<!-- Scripts -->
+	</div>
+	<!-- End Content -->
+
+	<!-- Scripts -->
 	<div id="scripts">
 		<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-		<script type="text/javascript" src="scripts/behavior.js"></script>	
+		<script type="text/javascript" src="scripts/behavior.js"></script>
 	</div>
 
 </body>
+
 </html>
